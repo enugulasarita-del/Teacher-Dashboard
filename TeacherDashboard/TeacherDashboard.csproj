@@ -8,10 +8,11 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>TeacherDashboard</RootNamespace>
     <AssemblyName>TeacherDashboard</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,11 +51,9 @@
   <ItemGroup>
     <!-- Models -->
     <Compile Include="Models\User.cs" />
-    
     <!-- Services -->
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\SessionManager.cs" />
-    
     <!-- Forms - Authentication -->
     <Compile Include="Forms\LoginForm.cs">
       <SubType>Form</SubType>
@@ -68,7 +67,6 @@
     <Compile Include="Forms\MainDashboardForm.Designer.cs">
       <DependentUpon>MainDashboardForm.cs</DependentUpon>
     </Compile>
-    
     <!-- Forms - Admin -->
     <Compile Include="Forms\AdminPanelForm.cs">
       <SubType>Form</SubType>
@@ -94,7 +92,6 @@
     <Compile Include="Forms\SystemSettingsForm.Designer.cs">
       <DependentUpon>SystemSettingsForm.cs</DependentUpon>
     </Compile>
-    
     <!-- Forms - Features -->
     <Compile Include="Forms\HomeForm.cs">
       <SubType>Form</SubType>
@@ -198,7 +195,6 @@
     <Compile Include="Forms\HolidayCalendarForm.Designer.cs">
       <DependentUpon>HolidayCalendarForm.cs</DependentUpon>
     </Compile>
-    
     <Compile Include="Forms\AcademicHubForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -206,7 +202,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ExamManagementForm.cs">
-
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\CommunicationHubForm.cs">
@@ -231,7 +226,6 @@
     <Compile Include="DashboardForm.Designer.cs">
       <DependentUpon>DashboardForm.cs</DependentUpon>
     </Compile>
-    
     <!-- Original UserControls (kept for reference) -->
     <Compile Include="Controls\HomeControl.cs">
       <SubType>UserControl</SubType>
@@ -351,6 +345,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

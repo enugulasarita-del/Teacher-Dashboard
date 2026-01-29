@@ -1,0 +1,129 @@
+<UserControl x:Class="LibrarianDashboard.Views.MembersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <Grid>
+         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+         </Grid.RowDefinitions>
+
+         <!-- Top Bar -->
+         <Grid Grid.Row="0" Margin="0,0,0,20">
+             <Grid.ColumnDefinitions>
+                 <ColumnDefinition Width="*"/>
+                 <ColumnDefinition Width="Auto"/>
+             </Grid.ColumnDefinitions>
+             <StackPanel>
+                 <TextBlock Text="Student Members" FontSize="20" FontWeight="Bold" Foreground="{DynamicResource DeepText}"/>
+                 <TextBlock Text="Directory of all registered students." Foreground="{DynamicResource TextSecondaryBrush}" FontSize="13" Margin="0,5,0,0"/>
+             </StackPanel>
+             <StackPanel Grid.Column="1">
+                  <Button Click="BtnOpenAddMember_Click" Background="{DynamicResource HighlightBrush}" Foreground="White" Padding="20,10" BorderThickness="0" FontSize="14" FontWeight="SemiBold">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="12" Padding="{TemplateBinding Padding}" Cursor="Hand">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Path Data="{StaticResource IconPlus}" Fill="White" Width="12" Height="12" Margin="0,0,8,0"/>
+                                    <TextBlock Text="New Student" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+             </StackPanel>
+         </Grid>
+            
+         <Border Grid.Row="1" Background="{DynamicResource CardBg}" CornerRadius="15" Padding="5">
+             <DataGrid ItemsSource="{Binding FilteredMembers}" AutoGenerateColumns="False" IsReadOnly="True" Margin="10">
+                 <DataGrid.Columns>
+                     <DataGridTextColumn Header="Student Name" Binding="{Binding Name}" Width="1.5*"/>
+                     <DataGridTextColumn Header="Roll Number" Binding="{Binding RollNumber}" Width="*"/>
+                     <DataGridTextColumn Header="College Gmail" Binding="{Binding Email}" Width="1.5*"/>
+                     
+                     <DataGridTemplateColumn Header="Status" Width="*">
+                         <DataGridTemplateColumn.CellTemplate>
+                             <DataTemplate>
+                                 <Border Background="#FEF2F2" CornerRadius="5" Padding="10,5" HorizontalAlignment="Left">
+                                     <TextBlock Text="{Binding Status}" Foreground="#DC2626" FontWeight="Bold" FontSize="11"/>
+                                 </Border>
+                             </DataTemplate>
+                         </DataGridTemplateColumn.CellTemplate>
+                     </DataGridTemplateColumn>
+
+                     <DataGridTextColumn Header="Books Borrowed" Binding="{Binding BooksIssued}" Width="*"/>
+
+                     <!-- MEMBER ACTIONS -->
+                     <DataGridTemplateColumn Header="Actions" Width="120">
+                          <DataGridTemplateColumn.CellTemplate>
+                             <DataTemplate>
+                                 <StackPanel Orientation="Horizontal">
+                                     <!-- ID Card Button -->
+                                     <Button Click="BtnShowIdCard_Click" Margin="2,0" Background="Transparent" BorderThickness="0" Cursor="Hand" ToolTip="View ID Card">
+                                         <Path Data="{StaticResource IconIdCard}" Fill="#AD1625" Width="18" Height="18" Stretch="Uniform"/>
+                                     </Button>
+                                     <!-- Edit -->
+                                     <Button Click="BtnEditMember_Click" Margin="2,0" Background="Transparent" BorderThickness="0" Cursor="Hand" ToolTip="Edit Member">
+                                         <Path Data="{StaticResource IconEdit}" Fill="#8E94A4" Width="14" Height="14" Stretch="Uniform"/>
+                                     </Button>
+                                     <!-- Delete -->
+                                     <Button Click="BtnDeleteMember_Click" Margin="2,0" Background="Transparent" BorderThickness="0" Cursor="Hand" ToolTip="Remove Member">
+                                         <Path Data="{StaticResource IconDelete}" Fill="#FF4081" Width="14" Height="14" Stretch="Uniform"/>
+                                     </Button>
+                                 </StackPanel>
+                             </DataTemplate>
+                         </DataGridTemplateColumn.CellTemplate>
+                     </DataGridTemplateColumn>
+                 </DataGrid.Columns>
+             </DataGrid>
+         </Border>
+
+         <!-- ID CARD OVERLAY (Originally in MainWindow, moved here for scope) -->
+         <Grid x:Name="Overlay_MemberCard" Grid.RowSpan="2" Visibility="Collapsed" Background="#CC000000" MouseDown="OverlayCard_MouseDown">
+            <Border Width="400" Height="265" CornerRadius="15" HorizontalAlignment="Center" VerticalAlignment="Center" MouseDown="Card_MouseDown">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#1E2130" Offset="0"/>
+                        <GradientStop Color="#2A2F3F" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid>
+                    <!-- Decorative Circles -->
+                    <Ellipse Width="200" Height="200" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-50,-50,0" Fill="White" Opacity="0.05"/>
+                    <Ellipse Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="-30,0,0,-30" Fill="White" Opacity="0.05"/>
+                    <StackPanel Margin="30">
+                         <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                             <!-- Placeholder Logo -->
+                             <Border Width="40" Height="40" Background="White" CornerRadius="8" Margin="0,0,15,0">
+                                 <TextBlock Text="V" FontSize="24" FontWeight="Bold" Foreground="#AD1625" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                             </Border>
+                             <StackPanel VerticalAlignment="Center">
+                                 <TextBlock Text="VSIT LIBRARY" Foreground="White" FontWeight="Bold" FontSize="14"/>
+                                 <TextBlock Text="Official Member Card" Foreground="#8899A6" FontSize="10"/>
+                             </StackPanel>
+                         </StackPanel>
+                         
+                         <TextBlock x:Name="TxtCardName" Text="STUDENT NAME" Foreground="White" FontSize="22" FontWeight="Bold" Margin="0,10,0,5"/>
+                         <TextBlock x:Name="TxtCardRole" Text="COLLEGE STUDENT" Foreground="#4CAF50" FontSize="12" FontWeight="SemiBold"/>
+                         
+                         <Grid Margin="0,30,0,0">
+                             <TextBlock x:Name="TxtCardID" Text="ID: 21XX1A0501" Foreground="White" Opacity="0.8" VerticalAlignment="Bottom"/>
+                             <Button Click="BtnPrintCard_Click" HorizontalAlignment="Right" Background="White" Foreground="Black" Padding="15,5" BorderThickness="0" FontWeight="Bold" Cursor="Hand" Content="Print Card">
+                                  <Button.Template>
+                                     <ControlTemplate TargetType="Button">
+                                         <Border Background="White" CornerRadius="5">
+                                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                         </Border>
+                                     </ControlTemplate>
+                                 </Button.Template>
+                             </Button>
+                         </Grid>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -20,3 +20,26 @@ C:\Users\RAHUL ENUGULA\OneDrive\Desktop\Teacher\TeacherDashboard\obj\Debug\Teach
 C:\Users\RAHUL ENUGULA\OneDrive\Desktop\Teacher\TeacherDashboard\obj\Debug\TeacherDashboard.csproj.CoreCompileInputs.cache
 C:\Users\RAHUL ENUGULA\OneDrive\Desktop\Teacher\TeacherDashboard\obj\Debug\TeacherDashboard.exe
 C:\Users\RAHUL ENUGULA\OneDrive\Desktop\Teacher\TeacherDashboard\obj\Debug\TeacherDashboard.pdb
+C:\Users\Hrida\Downloads\Rahulteacherdashboard\Teacher-Dashboard\TeacherDashboard\bin\Debug\logo.png
+C:\Users\Hrida\Downloads\Rahulteacherdashboard\Teacher-Dashboard\TeacherDashboard\bin\Debug\home.png
+C:\Users\Hrida\Downloads\Rahulteacherdashboard\Teacher-Dashboard\TeacherDashboard\bin\Debug\timetable.png
+C:\Users\Hrida\Downloads\Rahulteacherdashboard\Teacher-Dashboard\TeacherDashboard\bin\Debug\notices.png
+C:\Users\Hrida\Downloads\Rahulteacherdashboard\Teacher-Dashboard\TeacherDashboard\bin\Debug\lectures.png
+C:\Users\Hrida\Downloads\Rahulteacherdashboard\Teacher-Dashboard\TeacherDashboard\bin\Debug\settings.png
+C:\Users\Hrida\Downloads\Rahulteacherdashboard\Teacher-Dashboard\TeacherDashboard\bin\Debug\TeacherDashboard.exe.config
+C:\Users\Hrida\Downloads\Rahulteacherdashboard\Teacher-Dashboard\TeacherDashboard\bin\Debug\TeacherDashboard.exe
+C:\Users\Hrida\Downloads\Rahulteacherdashboard\Teacher-Dashboard\TeacherDashboard\bin\Debug\TeacherDashboard.pdb
+C:\Users\Hrida\Downloads\Rahulteacherdashboard\Teacher-Dashboard\TeacherDashboard\obj\Debug\TeacherDashboard.csproj.AssemblyReference.cache
+C:\Users\Hrida\Downloads\Rahulteacherdashboard\Teacher-Dashboard\TeacherDashboard\obj\Debug\TeacherDashboard.Controls.ReportsControl.resources
+C:\Users\Hrida\Downloads\Rahulteacherdashboard\Teacher-Dashboard\TeacherDashboard\obj\Debug\TeacherDashboard.Controls.StudentPerformanceControl.resources
+C:\Users\Hrida\Downloads\Rahulteacherdashboard\Teacher-Dashboard\TeacherDashboard\obj\Debug\TeacherDashboard.Controls.ResourceLibraryControl.resources
+C:\Users\Hrida\Downloads\Rahulteacherdashboard\Teacher-Dashboard\TeacherDashboard\obj\Debug\TeacherDashboard.Controls.StudentDirectoryControl.resources
+C:\Users\Hrida\Downloads\Rahulteacherdashboard\Teacher-Dashboard\TeacherDashboard\obj\Debug\TeacherDashboard.Controls.TasksControl.resources
+C:\Users\Hrida\Downloads\Rahulteacherdashboard\Teacher-Dashboard\TeacherDashboard\obj\Debug\TeacherDashboard.Controls.CourseManagementControl.resources
+C:\Users\Hrida\Downloads\Rahulteacherdashboard\Teacher-Dashboard\TeacherDashboard\obj\Debug\TeacherDashboard.Controls.AttendanceControl.resources
+C:\Users\Hrida\Downloads\Rahulteacherdashboard\Teacher-Dashboard\TeacherDashboard\obj\Debug\TeacherDashboard.DashboardForm.resources
+C:\Users\Hrida\Downloads\Rahulteacherdashboard\Teacher-Dashboard\TeacherDashboard\obj\Debug\TeacherDashboard.Properties.Resources.resources
+C:\Users\Hrida\Downloads\Rahulteacherdashboard\Teacher-Dashboard\TeacherDashboard\obj\Debug\TeacherDashboard.csproj.GenerateResource.cache
+C:\Users\Hrida\Downloads\Rahulteacherdashboard\Teacher-Dashboard\TeacherDashboard\obj\Debug\TeacherDashboard.csproj.CoreCompileInputs.cache
+C:\Users\Hrida\Downloads\Rahulteacherdashboard\Teacher-Dashboard\TeacherDashboard\obj\Debug\TeacherDashboard.exe
+C:\Users\Hrida\Downloads\Rahulteacherdashboard\Teacher-Dashboard\TeacherDashboard\obj\Debug\TeacherDashboard.pdb

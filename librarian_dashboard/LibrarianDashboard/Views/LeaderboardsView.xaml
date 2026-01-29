@@ -1,0 +1,102 @@
+<UserControl x:Class="LibrarianDashboard.Views.LeaderboardsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <Grid>
+        <ScrollViewer>
+            <StackPanel>
+                <TextBlock Text="🏆 Leaderboards" FontSize="22" FontWeight="Bold" Foreground="{DynamicResource DeepText}" Margin="0,0,0,20"/>
+                
+                <Grid Margin="0,0,0,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.5*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <!-- Top Readers -->
+                    <Border Grid.Column="0" Background="{DynamicResource CardBg}" CornerRadius="15" Padding="20" Margin="0,0,15,0">
+                        <Grid>
+                            <TextBlock Text="⭐ Top Library Visitors" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource DeepText}"/>
+                            <ItemsControl ItemsSource="{Binding TopReaders}" Margin="0,40,0,0">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Background="#F8FAFC" CornerRadius="8" Padding="12" Margin="0,0,0,8">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="30"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="{Binding Rank}" FontSize="18" FontWeight="Bold" Foreground="{DynamicResource HighlightBrush}" VerticalAlignment="Center"/>
+                                                <StackPanel Grid.Column="1" Margin="10,0">
+                                                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold" Foreground="{DynamicResource DeepText}"/>
+                                                    <TextBlock Text="{Binding Department}" FontSize="11" Foreground="#666"/>
+                                                </StackPanel>
+                                                <StackPanel Grid.Column="2" HorizontalAlignment="Right">
+                                                    <TextBlock Text="{Binding VisitCount, StringFormat={}{0} visits}" FontWeight="Bold" Foreground="{DynamicResource HighlightBrush}"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Grid>
+                    </Border>
+                    
+                    <!-- Student Classification -->
+                    <Border Grid.Column="1" Background="{DynamicResource CardBg}" CornerRadius="15" Padding="20">
+                        <StackPanel>
+                            <TextBlock Text="📊 Student Classification" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource DeepText}" Margin="0,0,0,20"/>
+                            <ItemsControl ItemsSource="{Binding StudentClassifications}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Margin="0,0,0,12">
+                                            <Grid>
+                                                <StackPanel>
+                                                    <Grid>
+                                                        <TextBlock Text="{Binding Category}" FontWeight="SemiBold" Foreground="{DynamicResource DeepText}"/>
+                                                        <TextBlock Text="{Binding Percentage, StringFormat={}{0}%}" HorizontalAlignment="Right" FontWeight="Bold" Foreground="{DynamicResource HighlightBrush}"/>
+                                                    </Grid>
+                                                    <TextBlock Text="{Binding Description}" FontSize="10" Foreground="#888" Margin="0,2,0,5"/>
+                                                    <ProgressBar Minimum="0" Maximum="100" Value="{Binding Percentage}" Height="8" BorderThickness="0" Background="#E2E8F0" Foreground="{DynamicResource HighlightBrush}"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <!-- Department Toppers -->
+                <Border Background="{DynamicResource CardBg}" CornerRadius="15" Padding="20">
+                    <Grid>
+                        <TextBlock Text="🎓 Department Toppers (Most Library Visits)" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource DeepText}"/>
+                        <ItemsControl ItemsSource="{Binding DepartmentToppers}" Margin="0,40,0,0">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="#FEF2F2" CornerRadius="10" Padding="15" Margin="0,0,15,10" Width="200">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Department}" FontWeight="Bold" Foreground="{DynamicResource HighlightBrush}" FontSize="12"/>
+                                            <TextBlock Text="{Binding Name}" FontWeight="SemiBold" Foreground="{DynamicResource DeepText}" Margin="0,5,0,0"/>
+                                            <TextBlock Text="{Binding VisitCount, StringFormat={}{0} library visits}" FontSize="11" Foreground="#666" Margin="0,3,0,0"/>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

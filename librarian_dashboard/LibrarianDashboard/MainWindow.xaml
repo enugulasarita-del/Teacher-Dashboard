@@ -1,0 +1,237 @@
+<Window x:Class="LibrarianDashboard.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:LibrarianDashboard.Views"
+        xmlns:converters="clr-namespace:LibrarianDashboard.Converters"
+        mc:Ignorable="d"
+        Title="VSIT Librarian Dashboard" Height="900" Width="1440"
+        WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True" WindowStyle="None" Background="Transparent" ResizeMode="CanResizeWithGrip">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="40" ResizeBorderThickness="5" CornerRadius="20" GlassFrameThickness="0"/>
+    </WindowChrome.WindowChrome>
+
+    <Window.Resources>
+        <!-- CONVERTERS -->
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <converters:DoubleToGridLengthConverter x:Key="DoubleToGridLengthConverter"/>
+        <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+        <converters:CountActiveAttendanceConverter x:Key="CountActiveAttendanceConverter"/>
+        <converters:TotalHoursConverter x:Key="TotalHoursConverter"/>
+
+        <!-- COLORS (Light Theme Default) -->
+        <SolidColorBrush x:Key="MainBgBrush" Color="#F8FAFC"/> <!-- Slate 50 -->
+        <SolidColorBrush x:Key="PanelBg" Color="White"/>
+        <SolidColorBrush x:Key="DeepText" Color="#0F172A"/> <!-- Slate 900 -->
+        <SolidColorBrush x:Key="TextSecondaryBrush" Color="#64748B"/> <!-- Slate 500 -->
+        <SolidColorBrush x:Key="HighlightBrush" Color="#DC2626"/> <!-- VSIT Red -->
+        <SolidColorBrush x:Key="CardBg" Color="White"/>
+        <SolidColorBrush x:Key="CardBorderBrush" Color="#E2E8F0"/>
+
+        <!-- STYLES -->
+
+
+
+
+    </Window.Resources>
+
+    <Border Background="{DynamicResource WindowBg}" CornerRadius="20" BorderBrush="#CBD5E1" BorderThickness="1" ClipToBounds="True">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding SidebarPercent, Converter={StaticResource DoubleToGridLengthConverter}, Mode=OneWay}"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- LEFT SIDEBAR -->
+            <Border Grid.Column="0" BorderBrush="#E2E8F0" BorderThickness="0,0,1,0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#7F1D1D" Offset="0"/> <!-- Dark Red -->
+                        <GradientStop Color="#B91C1C" Offset="1"/> <!-- Bright Red -->
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Profile / Logo -->
+                    <StackPanel Grid.Row="0" Margin="20,25,20,30">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                            <!-- Toggle Button -->
+                            <Button Click="BtnToggleSidebar_Click" Background="Transparent" BorderThickness="0" Cursor="Hand" Margin="0,0,15,0" VerticalAlignment="Center">
+                                <Path Data="M3,6h18v2H3V6z M3,11h18v2H3V11z M3,16h18v2H3V16z" Fill="White" Width="20" Height="20" Stretch="Uniform"/>
+                            </Button>
+                            
+                            <!-- Small Logo -->
+                            <Image Source="vidyalankar_logo.png" Width="32" Height="32" RenderOptions.BitmapScalingMode="HighQuality"/>
+                            <StackPanel VerticalAlignment="Center" Margin="10,0,0,0" Visibility="{Binding IsSidebarOpen, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <TextBlock Text="VSIT Library" FontSize="16" FontWeight="Bold" Foreground="White"/>
+                                <TextBlock Text="Admin Dashboard" FontSize="11" Foreground="#FECACA"/> <!-- Light Red Text -->
+                            </StackPanel>
+                        </StackPanel>
+                        
+                        <!-- Mini Profile -->
+                        <Border Background="#20FFFFFF" CornerRadius="12" Padding="15" Visibility="{Binding IsSidebarOpen, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Width="40" Height="40" CornerRadius="12" Background="White">
+                                    <TextBlock Text="AD" Foreground="#B91C1C" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                                    <TextBlock Text="Admin User" FontWeight="SemiBold" Foreground="White"/>
+                                    <TextBlock Text="Librarian Access" FontSize="10" Foreground="#FECACA"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- Navigation -->
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+                        <StackPanel Margin="15,0">
+                            <TextBlock Text="MAIN MENU" FontSize="11" FontWeight="Bold" Foreground="#FECACA" Margin="15,0,0,10"
+                                       Visibility="{Binding IsSidebarOpen, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                            
+                            <RadioButton x:Name="BtnMenuDashboard" Style="{StaticResource SidebarNavRadioButton}" IsChecked="True" Checked="Menu_Dashboard_Checked">
+                                <StackPanel Orientation="Horizontal">
+                                    <Path Data="{StaticResource IconDashboard}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" Width="16" Height="16" Margin="0,0,12,0"/>
+                                    <TextBlock Text="Dashboard" VerticalAlignment="Center" Visibility="{Binding IsSidebarOpen, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                </StackPanel>
+                            </RadioButton>
+
+                            <RadioButton Style="{StaticResource SidebarNavRadioButton}" Checked="Menu_Books_Checked">
+                                <StackPanel Orientation="Horizontal">
+                                    <Path Data="{StaticResource IconBooks}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" Width="16" Height="16" Margin="0,0,12,0"/>
+                                    <TextBlock Text="Book Inventory" VerticalAlignment="Center" Visibility="{Binding IsSidebarOpen, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                </StackPanel>
+                            </RadioButton>
+
+                            <RadioButton Style="{StaticResource SidebarNavRadioButton}" Checked="Menu_Issued_Checked">
+                                <StackPanel Orientation="Horizontal">
+                                    <Path Data="{StaticResource IconIssued}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" Width="16" Height="16" Margin="0,0,12,0"/>
+                                    <TextBlock Text="Issued Books" VerticalAlignment="Center" Visibility="{Binding IsSidebarOpen, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                </StackPanel>
+                            </RadioButton>
+
+                            <RadioButton Style="{StaticResource SidebarNavRadioButton}" Checked="Menu_Members_Checked">
+                                <StackPanel Orientation="Horizontal">
+                                    <Path Data="{StaticResource IconMembers}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" Width="16" Height="16" Margin="0,0,12,0"/>
+                                    <TextBlock Text="Members" VerticalAlignment="Center" Visibility="{Binding IsSidebarOpen, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                </StackPanel>
+                            </RadioButton>
+                            
+                            <RadioButton Style="{StaticResource SidebarNavRadioButton}" Checked="Menu_Attendance_Checked">
+                                <StackPanel Orientation="Horizontal">
+                                    <Path Data="{StaticResource IconAttendance}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" Width="16" Height="16" Margin="0,0,12,0"/>
+                                    <TextBlock Text="Attendance" VerticalAlignment="Center" Visibility="{Binding IsSidebarOpen, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                </StackPanel>
+                            </RadioButton>
+
+                            <TextBlock Text="ANALYTICS" FontSize="11" FontWeight="Bold" Foreground="#FECACA" Margin="15,20,0,10"
+                                       Visibility="{Binding IsSidebarOpen, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                            
+                            <RadioButton Style="{StaticResource SidebarNavRadioButton}" Checked="Menu_Analytics_Checked">
+                                <StackPanel Orientation="Horizontal">
+                                    <Path Data="{StaticResource IconAnalytics}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" Width="16" Height="16" Margin="0,0,12,0"/>
+                                    <TextBlock Text="Reports" VerticalAlignment="Center" Visibility="{Binding IsSidebarOpen, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                </StackPanel>
+                            </RadioButton>
+
+                             <RadioButton Style="{StaticResource SidebarNavRadioButton}" Checked="Menu_Leaderboards_Checked">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="🏆"  Width="16" Margin="0,0,12,0" TextAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"/>
+                                    <TextBlock Text="Leaderboards" VerticalAlignment="Center" Visibility="{Binding IsSidebarOpen, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                </StackPanel>
+                            </RadioButton>
+                             <RadioButton Style="{StaticResource SidebarNavRadioButton}" Checked="Menu_Notices_Checked">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="📢"  Width="16" Margin="0,0,12,0" TextAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"/>
+                                    <TextBlock Text="Notices" VerticalAlignment="Center" Visibility="{Binding IsSidebarOpen, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                </StackPanel>
+                            </RadioButton>
+                        </StackPanel>
+                    </ScrollViewer>
+
+                    <!-- Footer -->
+                    <StackPanel Grid.Row="2" Margin="25,0,25,25">
+                         <StackPanel x:Name="Sidebar_Footer_Theme" Orientation="Horizontal" Margin="5,0,0,15">
+                             <CheckBox Click="ThemeToggle_Click" VerticalAlignment="Center">
+                                 <TextBlock Text="Dark Mode" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="White" Opacity="0.9"/>
+                             </CheckBox>
+                         </StackPanel>
+                        <Button Style="{StaticResource SidebarButtonStyle}" Click="CloseButton_Click" Background="#40000000" Foreground="White" Padding="15">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Path Data="{StaticResource IconLogout}" Fill="White" Width="14" Height="14" Margin="0,0,10,0"/>
+                                <TextBlock Text="Logout System"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- MAIN CONTENT AREA -->
+            <Grid Grid.Column="1" Background="{DynamicResource MainBgBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/> <!-- Top Bar controls -->
+                    <RowDefinition Height="*"/>   <!-- Content -->
+                </Grid.RowDefinitions>
+
+                <!-- Custom Window Controls -->
+                <Grid Grid.Row="0" Margin="0,0,0,0" Height="40" Background="Transparent" MouseDown="TopBar_MouseDown">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,15,0" WindowChrome.IsHitTestVisibleInChrome="True">
+                         <Button Click="BtnExportData_Click" Content="Export CSV" Background="Transparent" Foreground="{DynamicResource TextSecondaryBrush}" BorderThickness="0" Margin="0,0,10,0" FontSize="11" Cursor="Hand"/>
+                        
+                        <Button Click="MinimizeButton_Click" Width="30" Height="30" Background="Transparent" BorderThickness="0" Cursor="Hand">
+                            <Rectangle Width="10" Height="2" Fill="{DynamicResource TextSecondaryBrush}"/>
+                        </Button>
+                        <Button Click="CloseButton_Click" Width="30" Height="30" Background="Transparent" BorderThickness="0" Cursor="Hand">
+                            <Path Data="{StaticResource IconClose}" Width="10" Height="10" Stretch="Uniform" Fill="{DynamicResource TextSecondaryBrush}"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+                <!-- DYNAMIC CONTENT VIEWS -->
+                <Grid Grid.Row="1" Margin="30,10,30,30">
+                    <views:DashboardView x:Name="UC_Dashboard"/>
+                    <views:BooksView x:Name="UC_Books" Visibility="Collapsed"/>
+                    <views:IssuedBooksView x:Name="UC_Issued" Visibility="Collapsed"/>
+                    <views:MembersView x:Name="UC_Members" Visibility="Collapsed"/>
+                    <views:AttendanceView x:Name="UC_Attendance" Visibility="Collapsed"/>
+                    <views:AnalyticsView x:Name="UC_Analytics" Visibility="Collapsed"/>
+                    <views:NoticesView x:Name="UC_Notices" Visibility="Collapsed"/>
+                    <views:LeaderboardsView x:Name="UC_Leaderboards" Visibility="Collapsed"/>
+                </Grid>
+            </Grid>
+
+            <!-- OVERLAYS (Global) -->
+            <!-- Add Book Overlay -->
+            <Grid x:Name="Overlay_AddBook" Grid.ColumnSpan="2" Visibility="Collapsed" Background="#CC000000" MouseDown="Overlay_AddBook_MouseDown">
+                <Border Width="600" Height="650" Background="{DynamicResource CardBg}" CornerRadius="16" MouseDown="Card_MouseDown" Padding="30">
+                    <Grid>
+                        <!-- Simplify Overlay for refactor - kept textblock to check it works -->
+                        <TextBlock Text="Add New Book Form" FontSize="20" FontWeight="Bold" Foreground="{DynamicResource DeepText}"/>
+                        <Button VerticalAlignment="Bottom" Click="Overlay_AddBook_Close" Content="Close" Background="#EEE" Padding="10"/>
+                    </Grid>
+                </Border>
+            </Grid>
+            
+             <!-- Notification Toast -->
+             <Border x:Name="Overlay_Notification" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,0" 
+                     Background="#333" CornerRadius="30" Padding="20,10" Opacity="0" IsHitTestVisible="False">
+                 <StackPanel Orientation="Horizontal">
+                     <TextBlock Text="✅" Margin="0,0,10,0"/>
+                     <TextBlock x:Name="TxtNotification" Text="Action Completed Successfully" Foreground="White" FontWeight="SemiBold"/>
+                 </StackPanel>
+             </Border>
+
+        </Grid>
+    </Border>
+</Window>

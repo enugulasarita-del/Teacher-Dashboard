@@ -1,0 +1,167 @@
+<UserControl x:Class="LibrarianDashboard.Views.AnalyticsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <Grid>
+        <ScrollViewer>
+        <StackPanel>
+            <TextBlock Text="Library Analytics" FontSize="20" FontWeight="Bold" Foreground="{DynamicResource DeepText}" Margin="0,0,0,20"/>
+            
+            <Grid Height="250" Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1.5*"/>
+                </Grid.ColumnDefinitions>
+                
+                <!-- Chart 1: Category Distribution (Simulated) -->
+                <Border Grid.Column="0" Background="{DynamicResource CardBg}" CornerRadius="15" Padding="20" Margin="0,0,20,0">
+                    <Grid>
+                        <TextBlock Text="Category Distribution" FontWeight="Bold" FontSize="16" Foreground="{DynamicResource DeepText}" VerticalAlignment="Top"/>
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <!-- Simulated Chart -->
+                            <StackPanel Orientation="Horizontal" Height="150" VerticalAlignment="Bottom">
+                                <StackPanel VerticalAlignment="Bottom" Margin="10">
+                                    <Border Height="80" Width="30" Background="#AD1625" CornerRadius="5"/>
+                                    <TextBlock Text="Fict" FontSize="10" HorizontalAlignment="Center" Margin="0,5,0,0" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                                </StackPanel>
+                                <StackPanel VerticalAlignment="Bottom" Margin="10">
+                                    <Border Height="120" Width="30" Background="#EA580C" CornerRadius="5"/>
+                                    <TextBlock Text="Tech" FontSize="10" HorizontalAlignment="Center" Margin="0,5,0,0" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                                </StackPanel>
+                                <StackPanel VerticalAlignment="Bottom" Margin="10">
+                                    <Border Height="60" Width="30" Background="#FF4081" CornerRadius="5"/>
+                                    <TextBlock Text="Sci" FontSize="10" HorizontalAlignment="Center" Margin="0,5,0,0" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                                    </StackPanel>
+                                    <StackPanel VerticalAlignment="Bottom" Margin="10">
+                                    <Border Height="90" Width="30" Background="#FFC107" CornerRadius="5"/>
+                                    <TextBlock Text="Hist" FontSize="10" HorizontalAlignment="Center" Margin="0,5,0,0" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                
+                <!-- Panel 2: Summary -->
+                <Border Grid.Column="1" Background="{DynamicResource CardBg}" CornerRadius="15" Padding="20">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="Total Library Visits" Foreground="{DynamicResource TextSecondaryBrush}" Opacity="0.7" FontSize="14"/>
+                        <TextBlock Text="{Binding TotalLibraryVisits, StringFormat={}{0:N0}}" Foreground="{DynamicResource HighlightBrush}" FontWeight="Bold" FontSize="36" Margin="0,5,0,10"/>
+                        <Border Background="{DynamicResource CardBorderBrush}" Height="1" Opacity="0.5" Margin="0,10"/>
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock Text="Peak Hour:" Foreground="{DynamicResource TextSecondaryBrush}" Opacity="0.7" FontSize="12"/>
+                                <TextBlock Text="{Binding PeakHour}" Foreground="{DynamicResource DeepText}" FontWeight="Bold" FontSize="14"/>
+                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Right">
+                                <TextBlock Text="Busiest Day:" Foreground="{DynamicResource TextSecondaryBrush}" Opacity="0.7" FontSize="12"/>
+                                <TextBlock Text="{Binding BusiestDay}" Foreground="{DynamicResource DeepText}" FontWeight="Bold" FontSize="14"/>
+                            </StackPanel>
+                        </Grid>
+                        <Border Background="{DynamicResource CardBorderBrush}" Height="1" Opacity="0.5" Margin="0,10"/>
+                        <TextBlock Text="Most Popular:" Foreground="{DynamicResource TextSecondaryBrush}" Opacity="0.7" FontSize="12" Margin="0,5"/>
+                        <TextBlock Text="{Binding MostPopularPurpose}" Foreground="{DynamicResource DeepText}" FontWeight="Bold" FontSize="14" TextTrimming="CharacterEllipsis"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- Top Readers -->
+            <Grid Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Library Live Status -->
+                <Border Grid.Column="0" Background="{DynamicResource CardBg}" CornerRadius="20" Padding="25" Margin="0,0,20,0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1">
+                    <StackPanel>
+                        <TextBlock Text="Library Live Status" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource DeepText}"/>
+                        <TextBlock Text="Current Occupancy and Noise" FontSize="12" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,2,0,20"/>
+                        
+                        <Grid Margin="0,10">
+                            <TextBlock Text="Current Capacity" FontSize="12" Foreground="{DynamicResource DeepText}" FontWeight="SemiBold"/>
+                            <TextBlock Text="68%" HorizontalAlignment="Right" FontSize="12" FontWeight="Bold" Foreground="{DynamicResource HighlightBrush}"/>
+                        </Grid>
+                        <Border Height="10" Background="{DynamicResource CardBorderBrush}" CornerRadius="5">
+                            <Border Width="180" Background="{DynamicResource HighlightBrush}" CornerRadius="5" HorizontalAlignment="Left"/>
+                        </Border>
+
+                        <Grid Margin="0,20,0,0">
+                            <TextBlock Text="Noise Level" FontSize="12" Foreground="{DynamicResource DeepText}" FontWeight="SemiBold"/>
+                            <TextBlock Text="Low" HorizontalAlignment="Right" FontSize="12" FontWeight="Bold" Foreground="#10B981"/>
+                        </Grid>
+                        <Border Height="10" Background="{DynamicResource CardBorderBrush}" CornerRadius="5">
+                            <Border Width="60" Background="#10B981" CornerRadius="5" HorizontalAlignment="Left"/>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- Top Readers Widget -->
+                <Border Grid.Column="1" Background="{DynamicResource CardBg}" CornerRadius="20" Padding="25" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1">
+                    <StackPanel>
+                        <TextBlock Text="Top Readers" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource DeepText}" Margin="0,0,0,15"/>
+                        
+                        <!-- Reader 1 -->
+                        <Grid Margin="0,0,0,12">
+                            <Border Width="32" Height="32" CornerRadius="16" Background="#EEF2FF" HorizontalAlignment="Left">
+                                <TextBlock Text="👑" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"/>
+                            </Border>
+                            <StackPanel Margin="42,0,0,0">
+                                <TextBlock Text="Ananya Sharma" FontSize="13" FontWeight="Bold" Foreground="{DynamicResource DeepText}"/>
+                                <TextBlock Text="12 Books this month" FontSize="10" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                            </StackPanel>
+                        </Grid>
+                        
+                        <!-- Reader 2 -->
+                        <Grid>
+                            <Border Width="32" Height="32" CornerRadius="16" Background="#FEF2F2" HorizontalAlignment="Left">
+                                <TextBlock Text="🥈" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"/>
+                            </Border>
+                            <StackPanel Margin="42,0,0,0">
+                                <TextBlock Text="Vikram Rathore" FontSize="13" FontWeight="Bold" Foreground="{DynamicResource DeepText}"/>
+                                <TextBlock Text="10 Books this month" FontSize="10" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- Popular Books Carousel skipped for brevity, keeping simple -->
+            
+            <!-- Chart 3: Daily Footfall (Real Data) -->
+            <Border Background="White" CornerRadius="15" Padding="20" Height="200">
+                    <Grid>
+                        <StackPanel>
+                        <TextBlock Text="Weekly Footfall (Real Data)" FontWeight="Bold" FontSize="16" Foreground="{DynamicResource DeepText}"/>
+                        <TextBlock Text="{Binding AvgDailyFootfall, StringFormat='Avg. {0:F0} students/day'}" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,2,0,0"/>
+                        </StackPanel>
+                        
+                        <ItemsControl ItemsSource="{Binding FootfallStats}" VerticalAlignment="Bottom" Margin="0,40,0,0">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Bottom" Margin="12,0">
+                                        <Border Background="{Binding BarColor}" Width="30" Height="{Binding Height}" CornerRadius="6" 
+                                                Opacity="{Binding Opacity}" ToolTip="{Binding Count}">
+                                            <Border.Effect>
+                                                <DropShadowEffect Color="#B91C1C" BlurRadius="10" Opacity="0.1" Direction="270"/>
+                                            </Border.Effect>
+                                        </Border>
+                                        <TextBlock Text="{Binding Day}" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}" 
+                                                    HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+            </Border>
+        </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
